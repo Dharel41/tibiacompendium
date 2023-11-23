@@ -11,8 +11,8 @@ app.register_blueprint(country, url_prefix='/countries')
 conn = pymysql.connect( 
     host='localhost', 
     user='root',  
-    password = "database", 
-    db='world', 
+    password="database", 
+    db='world'
     )
 
 @app.route('/')
