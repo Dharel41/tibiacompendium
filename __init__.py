@@ -13,7 +13,7 @@ conn = pymysql.connect(
     user='root',  
     password="database", 
     db='world'
-)
+    )
 
 @app.route('/')
 def index():
