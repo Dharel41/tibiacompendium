@@ -8,8 +8,6 @@ app.register_blueprint(city, url_prefix='/cities')
 app.register_blueprint(country, url_prefix='/countries')
 
 # database connection
-# 0:51
-# 0:52
 conn = pymysql.connect( 
     host='localhost', 
     user='root',  
