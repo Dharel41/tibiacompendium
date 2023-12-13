@@ -1,19 +1,13 @@
-import pymysql
 from flask import Flask
 from tibiacompendium.city.views import city
 from tibiacompendium.country.views import country
 
 app = Flask(__name__)
-app.register_blueprint(city, url_prefix='/cities')
-app.register_blueprint(country, url_prefix='/countries')
+app.url_map.strict_slashes = False
 
-# database connection
-conn = pymysql.connect( 
-    host='localhost', 
-    user='root',  
-    password="database", 
-    db='world'
-)
+app.register_blueprint(city)
+app.register_blueprint(country)
+
 
 @app.route('/')
 def index():
