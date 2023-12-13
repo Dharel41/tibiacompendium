@@ -15,7 +15,7 @@ def get_cities():
 @city.route('/api/cities/<string:name>', methods=['GET'])
 def get_city_by_name(name):
     with mysql.cursor() as cursor:
-        cursor.execute("SELECT id, name,added_in_version, is_premium_needed as pop FROM city where name = %s", name)
+        cursor.execute("SELECT id, name, added_in_version, is_premium_needed as pop FROM city where name = %s", name)
         data = cursor.fetchall()
         cursor.close()
         return jsonify(data)
@@ -41,6 +41,6 @@ def post_city():
 @city.route('/cities', methods=['GET'])
 def render_cities_template():
     with mysql.cursor() as cursor:
-        cursor.execute("SELECT id, name, added_in_version, is_premium_needed as pop FROM city order by is_premium_needed, name")
+        cursor.execute("SELECT id, name, added_in_version, is_premium_needed as pop FROM city order by is_premium_needed, abs(added_in_version)")
         data = cursor.fetchall()
         return render_template('city.html', cities = data)
