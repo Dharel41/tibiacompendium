@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from tibiacompendium.city.views import city
 from tibiacompendium.country.views import country
 
@@ -10,5 +10,5 @@ app.register_blueprint(country)
 
 
 @app.route('/')
-def index():
-    return 'Index Page'
+def home():
+    return render_template('home.html')
