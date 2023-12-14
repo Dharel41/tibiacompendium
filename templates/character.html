@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<a href="{{ url_for('home') }}">HOME</a>
+
+<br><br>
+{% block content %}
+  <form method="get">
+    <input name="search" id="search" required>
+    <input type="submit" value="Search">
+  </form>
+{% endblock %}
+
+
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Level</th>
+            <th>Vocation</th>
+            <th>World</th>
+            <th>Residence</th>
+            <th>Achievement points</th>
+            <th>Last login</th>
+            <th>Created date</th>
+        </tr>
+    </thead>
+        {% for character in characters%}
+        <td>{{character['name']}}</td>
+        <td>{{character['level']}}</td>
+        <td>{{character['vocation']}}</td>
+        <td>{{character['world']}}</td>
+        <td>{{character['residence']}}</td>
+        <td>{{character['achievement_points']}}</td>
+        <td>{{character['last_login']}}</td>
+        <td>{{character['created']}}</td>
+        </tr>
+        {% endfor %}
+</table>

@@ -1,6 +1,11 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='home_style.css') }}">
 <div class="grid-container">
+
     <a href="{{ url_for('city.render_cities_template') }}">
         <div class="grid-item">CITIES</div>
     </a>
+    <a href="{{ url_for('character.render_character_template') }}">
+        <div class="grid-item">CHARACTERS</div>
+    </a>
+
 </div>

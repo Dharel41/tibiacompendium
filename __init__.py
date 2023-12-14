@@ -1,12 +1,12 @@
 from flask import Flask, render_template
 from tibiacompendium.city.views import city
-from tibiacompendium.country.views import country
+from tibiacompendium.character.views import character
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
 app.register_blueprint(city)
-app.register_blueprint(country)
+app.register_blueprint(character)
 
 
 @app.route('/')
