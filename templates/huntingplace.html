@@ -3,6 +3,7 @@
 <a href="{{ url_for('home') }}">HOME</a>
 <br><br>
 
+<!-- filter fields -->
 <form action="{{ url_for('hunt.render_huntingplaces_template') }}" method="get">
   <fieldset>
     <legend>Select hunt type:</legend>  
@@ -28,6 +29,7 @@
   </fieldset>
 </form>
 
+<!-- table with data -->
 <table class="styled-table">
     <thead>
         <tr>
@@ -53,3 +55,30 @@
         </tr>
         {% endfor %}
 </table>
+
+<!-- form with field to add -->
+  <form action="{{ url_for('hunt.add_huntingplace') }}" method="post">
+
+    <input type="text" placeholder="Enter a name" id = "name" name="name" >
+    <input type="text" placeholder="Enter a character levels" name="character_levels" >
+    <select name="hunt_type" id="hunt_type">
+      <option value="solo">Solo</option>
+      <option value="duo">Duo</option>
+    </select>
+    <input type="number" placeholder="Enter a exp[k/h]" name="exp_on_hour" >
+    <select name="exp_factor" id="exp_factor">
+      <option value="100">100%</option>
+      <option value="150">150%</option>
+      <option value="200">200%</option>
+      <option value="225">225%</option>
+      <option value="300">300%</option>
+      <option value="375">375%</option>
+    </select>
+    <input type="number" placeholder="Enter a gold[k/h]" name="gold_on_hour" >
+    <input type="text" placeholder="Enter a rune" name="rune" >
+    <input type="text" placeholder="Enter a equipment with resistance" name="eq_with_resistance" >
+    <input type="text" placeholder="Enter a description" name="description" >
+
+    <button type="submit" class="btn">Add</button>
+    
+  </form>

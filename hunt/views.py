@@ -1,9 +1,14 @@
-from flask import Blueprint, jsonify, request, abort, render_template
+from flask import Blueprint, jsonify, request, abort, render_template, url_for, redirect
 from tibiacompendium.db import mysql
 from pymysql.err import IntegrityError, DataError
 
 # API using database cursor connection
 hunt = Blueprint('hunt', __name__)
+@hunt.route('/hunting-places', methods=['POST'])
+def add_huntingplace():
+    print("TODO ADD LOGIC")
+    print(request.form)
+    return redirect(url_for('hunt.render_huntingplaces_template', hunt_type=request.form.get('hunt_type')))
 
 @hunt.route('/hunting-places', methods=['GET'])
 def render_huntingplaces_template():
