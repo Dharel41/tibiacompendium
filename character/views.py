@@ -3,6 +3,7 @@ import urllib
 from datetime import datetime
 from flask import Blueprint, render_template, request
 
+# use external API
 character = Blueprint('character', __name__)
 
 @character.route('/characters', methods=['GET'])

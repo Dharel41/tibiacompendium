@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request, abort, render_template
 from tibiacompendium.db import mysql
 from pymysql.err import IntegrityError, DataError
 
+# simple API, using database cursor connection
 city = Blueprint('city', __name__)
 
 @city.route('/api/cities', methods=['GET'])
@@ -32,7 +33,8 @@ def post_city():
     
     with mysql.cursor() as cursor:
         try:
-            cursor.execute("INSERT INTO city (name, is_premium_needed) VALUES (%s, %s)", (name, is_premium_needed))
+            cursor.execute("INSERT INTO city (name, is_premium_needed, added_in_version, added_in_version) VALUES (%s, %s)", 
+                           (name, is_premium_needed, added_in_version))
             mysql.commit()
             return ({}, 204)
         except (IntegrityError, DataError) as e:
