@@ -1,0 +1,51 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<a href="{{ url_for('home') }}">HOME</a>
+<br><br>
+
+<form action="{{ url_for('hunt.render_huntingplaces_template') }}" method="get">
+  <fieldset>
+    <legend>Select hunt type:</legend>  
+    
+    <div>
+      <input type="radio" id="solo" name="hunt_type" value="solo" {% if hunt_type == "solo" %}checked{% endif %}/>
+      <label for="solo">Solo</label>
+    </div>
+  
+    <div>
+      <input type="radio" id="duo" name="hunt_type" value="duo"  {% if hunt_type == "duo" %}checked{% endif %}/>
+      <label for="duo">Duo</label>
+    </div>
+
+    <div>
+      <button type="submit">Filter</button>
+    </div>
+
+  </fieldset>
+</form>
+
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Character levels</th>
+            <th>Hunt type</th>
+            <th>Exp[k/h]</th>
+            <th>Gold[k/h]</th>
+            <th>Rune</th>
+            <th>Equipment with resistance</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+        {% for place in hunting_places%}
+        <td>{{place[0]}}</td>
+        <td>{{place[1]}}</td>
+        <td>{{place[2]}}</td>
+        <td>{{place[3]}}</td>
+        <td>{{place[4]}}</td>
+        <td>{{place[5]}}</td>
+        <td>{{place[6]}}</td>
+        <td>{{place[7]}}</td>
+        </tr>
+        {% endfor %}
+</table>
