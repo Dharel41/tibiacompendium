@@ -8,9 +8,11 @@ hunt = Blueprint('hunt', __name__)
 @hunt.route('/hunting-places', methods=['GET'])
 def render_huntingplaces_template():
     hunt_type = request.args.get('hunt_type', 'solo')
+    name = request.args.get('name', '')
 
     with mysql.cursor() as cursor:
         where_condition = "WHERE hunt_type = 'solo'" if hunt_type == 'solo' else "WHERE hunt_type = 'duo'"
+        where_condition += f"AND name LIKE '%{name}%'"
         cursor.execute(
             """
             SELECT 
