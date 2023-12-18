@@ -36,7 +36,7 @@
             <th>Name</th>
             <th>Character levels</th>
             <th>Hunt type</th>
-            <th>Exp[k/h]</th>
+            <th>Exp[k/h][100%]</th>
             <th>Gold[k/h]</th>
             <th>Rune</th>
             <th>Equipment with resistance</th>
@@ -80,5 +80,10 @@
     <input type="text" placeholder="Enter a description" name="description" >
 
     <button type="submit" class="add-btn">Add</button>
+  
+    <br>
+    {% if errors %}
+      <label class="error-label"> {{errors}} </label>
+    {% endif %}
     
   </form>

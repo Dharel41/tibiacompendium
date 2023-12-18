@@ -60,3 +60,8 @@ styled-table th,
   box-shadow: 0 2px #666;
   transform: translateY(4px);
 }
+
+/* labels ss */
+.error-label{
+  color: red;
+}
