@@ -61,6 +61,28 @@ styled-table th,
   transform: translateY(4px);
 }
 
+.delete-btn {
+  display: inline-block;
+  font-size: 15px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #df0909;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 3px #999;
+}
+
+.delete-btn:hover {background-color: #df0909}
+
+.delete-btn:active {
+  background-color: #df0909;
+  box-shadow: 0 2px #666;
+  transform: translateY(4px);
+}
+
 /* labels ss */
 .error-label{
   color: red;
