@@ -87,3 +87,15 @@
     {% endif %}
     
   </form>
+
+  <!-- delete section -->
+  <form action="{{ url_for('hunt.delete_huntingplace') }}" method="post">
+
+    <select name="id" id="deleteSelect">
+      {% for place in hunting_places%}
+        <option value="{{place[8]}}">{{place[0]}}</option>
+      {% endfor %}
+    </select>
+    <button id="deleteBtn" type="submit" class="delete-btn" >Delete</button>
+
+  </form>

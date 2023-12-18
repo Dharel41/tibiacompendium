@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, url_for, redirect, abort
+from flask import Blueprint, Response, request, render_template, url_for, redirect, abort
 from pymysql.err import IntegrityError, DataError
 from tibiacompendium.db import mysql
 from tibiacompendium.hunt.helpers import count_exp_speed
@@ -6,6 +6,7 @@ from tibiacompendium.hunt.validators import validate_hunting_place_data
 
 # API using database cursor connection
 hunt = Blueprint('hunt', __name__)
+
 @hunt.route('/hunting-places', methods=['POST'])
 def add_huntingplace():
     errors, validated_data = validate_hunting_place_data(request.form)
@@ -33,6 +34,26 @@ def add_huntingplace():
             
             return redirect(url_for('hunt.render_huntingplaces_template', hunt_type=validated_data.get('hunt_type')))
 
+# delete must be post method due html form restrictions
+@hunt.route('/hunting-places/delete', methods=['POST'])    
+def delete_huntingplace():
+    id = request.form.get('id')
+
+    with mysql.cursor() as cursor:
+        try:
+            cursor.execute(
+                """
+                    DELETE from huntingplace where id = %s
+                """, 
+                (id)
+            )
+        except (IntegrityError, DataError) as e:
+            abort(400, str(e))
+        else:
+            mysql.commit()
+    
+    return redirect(url_for('hunt.render_huntingplaces_template'))
+
 @hunt.route('/hunting-places', methods=['GET'])
 def render_huntingplaces_template():
     hunt_type = request.args.get('hunt_type', 'solo')
@@ -45,7 +66,8 @@ def render_huntingplaces_template():
             """
             SELECT 
                 COALESCE(name, ''), COALESCE(character_levels, ''), COALESCE(hunt_type, ''), COALESCE(exp_on_hour, ''), 
-                COALESCE(gold_on_hour, ''), COALESCE(rune, ''), COALESCE(equipment_with_resistance, ''), COALESCE(description, '')
+                COALESCE(gold_on_hour, ''), COALESCE(rune, ''), COALESCE(equipment_with_resistance, ''), COALESCE(description, ''),
+                id
             FROM 
                 huntingplace
             """ + where_condition + "order by exp_on_hour desc")
